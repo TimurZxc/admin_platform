@@ -5,9 +5,9 @@ import BarChart from '../../components/Bar'
 
 const Bar = () => {
   return (
-    <Box m={'20px'} height={'100vh'} width={'75vw'}>
+    <Box m={'20px'} height={'98vh'} width={'75vw'}>
         <Header subtittle={'Столбчатая диаграмма'}/>
-        <Box height={'75%'} width={'106%'}>
+        <Box height={'75%'} width={'100%'}>
             <BarChart/>
         </Box>
     </Box>
