@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import { mockTransactions } from "../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
@@ -17,10 +17,9 @@ const Dashboard = () => {
     const colors = tokens(theme.palette.mode);
 
     return (
-        <Box m="20px" height={'70vh'}>
+        <Box m="20px">
             {/* HEADER */}
-            <Box display="flex" justifyContent="space-between" alignItems="center">
-
+            <Box display="flex" alignItems="center" >
                 <Box>
                     <Button
                         sx={{
@@ -41,7 +40,7 @@ const Dashboard = () => {
             {/* GRID & CHARTS */}
             <Box
                 display="grid"
-                gridTemplateColumns="repeat(12, 1fr)"
+                gridTemplateColumns="repeat(12, 2fr)"
                 gridAutoRows="125px"
                 gap="20px"
             >

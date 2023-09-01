@@ -6,7 +6,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { SendOutlined } from "@mui/icons-material";
-import { UploadOutlined } from "@mui/icons-material";
+// import { UploadOutlined } from "@mui/icons-material";
 import { tokens } from "../../theme";
 import React from "react";
 import AccordionComponent from "../accordion";
