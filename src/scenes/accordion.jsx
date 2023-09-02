@@ -1,11 +1,11 @@
 import React from 'react'
-import { useTheme, Button} from "@mui/material";
+import { useTheme, Button } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import {SendOutlined} from "@mui/icons-material";
+import { SendOutlined } from "@mui/icons-material";
 import { tokens } from "../theme";
 import axios from 'axios';
 
@@ -14,17 +14,26 @@ const AccordionComponent = (props) => {
     const colors = tokens(theme.palette.mode);
 
     function handleSubmit(event) {
+        const headers = {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Access-Control-Allow-Origin': '*',
+        };
+
         event.preventDefault();
         axios.post('test/', {
-          title: props.title,
-          description: props.description,
-          url: props.url,
-        }).then((response) => {
-            console.log('response', response)
+            title: props.title,
+            description: props.description,
+            url: props.url
+            },
+            {headers: headers}
+        ).then((response) => {
+            if (response.status === 200) {
+                console.log('status', 'Статья была опубликована!');
+            }
         }).catch((error) => {
-          console.log(error);
-        });
-      }
+                console.log('Error posting data:', error);
+            });
+    }
 
     return (
         <Accordion defaultExpanded>

@@ -9,7 +9,6 @@ import { SendOutlined } from "@mui/icons-material";
 // import { UploadOutlined } from "@mui/icons-material";
 import { tokens } from "../../theme";
 import React from "react";
-import AccordionComponent from "../accordion";
 import axios from "axios";
 
 const FullContent = () => {
@@ -17,6 +16,7 @@ const FullContent = () => {
   const colors = tokens(theme.palette.mode);
 
   const [news, setNews] = React.useState([])
+  const [published, setPublished] = React.useState(0)
 
   axios.defaults.headers.get['Content-Type'] = 'application/json;charset=utf-8';
   axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
@@ -31,23 +31,33 @@ const FullContent = () => {
   //     .catch((error) => {
   //       console.log('Error fetching data:', error);
   //     });
-  // }, [newsData]);
+  // }, [news]);
 
-  const publishNewsData = () => {
+  const getData = () =>{
+    axios
+      .get('https://3e73-95-141-138-95.ngrok-free.app/publich_channel')
+      .then((response) => {
+        const newsData = response.data;
+        setNews(newsData);
+      })
+      .catch((error) => {
+        console.log('Error fetching data:', error);
+      });
+  }
+
+  const publishNewsData = (id) => {
     const headers = {
       'Content-Type': 'application/json;charset=utf-8',
       'Access-Control-Allow-Origin': '*',
     };
-  
+
     axios
       .post(
-        'https://3e73-95-141-138-95.ngrok-free.app/publich_channel',
+        `https://3e73-95-141-138-95.ngrok-free.app/publich_channel/${id}`,
         {
-          title: 'High-Speed Rail Expansion',
-          description:
-            'A major high-speed rail project receives funding for expansion, connecting additional cities for rapid transit.',
-          url:
-            'https://www.hurriyet.com.tr/gundem/canakkalede-lastik-bottaki-39-kacak-gocmen-yakalandi-42323321',
+          title: news.title,
+          description: news.description,
+          url: news.url
         },
         {
           headers: headers,
@@ -56,41 +66,60 @@ const FullContent = () => {
       .then((response) => {
         if (response.status === 200) {
           console.log('status', 'Статья была опубликована!');
-          // Set your registrationStatus state here if needed.
+          setPublished((prevCount) => prevCount + 1)
         }
       })
       .catch((error) => {
         console.log('Error posting data:', error);
         // Handle the error and set your registrationStatus state accordingly.
       });
-  };  
+  };
 
-  const newsSection = news.map(data => {
-    return <AccordionComponent
-      title={data.title}
-      description={data.description}
-      url={data.url}
-    />
-  })
+  React.useEffect(() => {
+    getData();
+  }, [published])
 
   return (
     <Box m="0 20px 0 20px">
       <Header title="FAQ" subtitle="Frequently Asked Questions Page" />
-      {/* <Button
-            sx={{
-              backgroundColor: colors.greenAccent[600],
-              color: colors.grey[100],
-              fontSize: "12px",
-              fontWeight: "bold",
-              padding: "10px 10px",
-              margin: '10px 0 0 0'
-            }}
-            onClick={fetchNewsData}
-          >
-            <UploadOutlined sx={{ mr: "10px", fontSize: '18px'}} />
-            Получить данные
-        </Button> */}
-      {newsSection}
+      {
+        news.map((data) => (
+          <Accordion defaultExpanded key={data.id}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography color={colors.greenAccent[500]} variant="h5">
+                    Полученная новость
+                </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+                <Typography>
+                    {data.title}
+                </Typography>
+                <Typography>
+                    {data.description}
+                </Typography>
+                <Typography color={colors.greenAccent[500]} variant="h5">
+                    {data.url}
+                </Typography>
+                <Button
+                    sx={{
+                        backgroundColor: colors.greenAccent[600],
+                        color: colors.grey[100],
+                        fontSize: "12px",
+                        fontWeight: "bold",
+                        padding: "10px 10px",
+                        margin: '10px 0 0 0'
+                    }}
+                    onClick={() => {publishNewsData(data.id)}}
+                >
+                    Опубликовать
+                    <SendOutlined sx={{ ml: "10px", fontSize: '18px' }} />
+                </Button>
+            </AccordionDetails>
+        </Accordion>
+        ))
+        }
+
+        {/* HardCoded */}
       <Accordion defaultExpanded>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography color={colors.greenAccent[500]} variant="h4">
@@ -183,7 +212,7 @@ const FullContent = () => {
           </Button>
         </AccordionDetails>
       </Accordion>
-    </Box>
+    </Box >
   );
 };
 
