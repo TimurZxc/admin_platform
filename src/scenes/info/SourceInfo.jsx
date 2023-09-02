@@ -37,10 +37,10 @@ const SourceInfo = () => {
     { field: 'cdate', headerName: 'Дата выгрузки', flex: 0.6, cellClassName: 'cell-font' },
     { field: 'udate', headerName: 'Дата обновления', flex: 0.6, cellClassName: 'cell-font' },
     { field: 'cancel',headerName: '', flex: 0.2,
-    renderCell: () => {
+    renderCell: ({ row: { id }}) => {
       return (
         <Button
-          onClick={handleDelete}
+          onClick={()=> {handleDelete(id)}}
           sx={{ maxWidth: '32px', minWidth: '32px', backgroundColor: `${colors.redAccent[500]}`, padding: '3px', color: '#fff' }} >
           <CancelOutlined />
         </Button>
@@ -48,10 +48,6 @@ const SourceInfo = () => {
       }
     }
   ]
-
-  const handleModalClose = () => {
-    setRegistrationStatus('');
-  };
 
   useEffect(() => {
   }, [deleteCount])

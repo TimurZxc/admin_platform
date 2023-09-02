@@ -21,17 +21,17 @@ const FullContent = () => {
   axios.defaults.headers.get['Content-Type'] = 'application/json;charset=utf-8';
   axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
 
-  // React.useEffect(() => {
-  //   axios
-  //     .get('https://3e73-95-141-138-95.ngrok-free.app/publich_channel')
-  //     .then((response) => {
-  //       const newsData = response.data;
-  //       setNews(newsData);
-  //     })
-  //     .catch((error) => {
-  //       console.log('Error fetching data:', error);
-  //     });
-  // }, [news]);
+  React.useEffect(() => {
+    axios
+      .get('https://3e73-95-141-138-95.ngrok-free.app/publich_channel')
+      .then((response) => {
+        const newsData = response.data;
+        setNews(newsData);
+      })
+      .catch((error) => {
+        console.log('Error fetching data:', error);
+      });
+  }, [news]);
 
   const getData = () =>{
     axios
@@ -71,7 +71,6 @@ const FullContent = () => {
       })
       .catch((error) => {
         console.log('Error posting data:', error);
-        // Handle the error and set your registrationStatus state accordingly.
       });
   };
 
