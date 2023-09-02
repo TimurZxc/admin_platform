@@ -6,15 +6,42 @@ import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 // import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 // import PersonAddIcon from "@mui/icons-material/PersonAdd";
 // import TrafficIcon from "@mui/icons-material/Traffic";
-import LineChart from "../../components/Line";
 import BarChart from "../../components/Bar";
 // import StatBox from "../../components/StatBox";
 // import ProgressCircle from "../../components/ProgressCircle";
 import PieChart from "../../components/Pie";
+import LineChartYears from "../../components/LineYears";
 
 const Dashboard = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+
+    const handleDownload = () => {
+        // Create an HTML element to represent the content you want to download
+        const contentLine = document.getElementById('line-chart');
+        const contentPie = document.getElementById('pie-chart');
+        const contentBar = document.getElementById('bar-chart');
+    
+        // Serialize the content as a string (you can use other methods for your specific content)
+        const contentString1 = new XMLSerializer().serializeToString(contentLine);
+        const contentString2 = new XMLSerializer().serializeToString(contentPie);
+        const contentString3 = new XMLSerializer().serializeToString(contentBar);
+    
+        // Create a Blob from the content string
+        const blob = new Blob([contentString1, contentString2, contentString3], { type: 'text/html' });
+    
+        // Generate a URL for the Blob
+        const url = URL.createObjectURL(blob);
+    
+        // Create an anchor element with the download attribute and trigger a click to start the download
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'chart-summary.html'; // Specify the filename for the downloaded file
+        a.click();
+    
+        // Release the URL object to free up memory
+        URL.revokeObjectURL(url);
+      };
 
     return (
         <Box m="20px">
@@ -30,6 +57,7 @@ const Dashboard = () => {
                             padding: "10px 20px",
                             marginBottom: '10px'
                         }}
+                        onClick={handleDownload}
                     >
                         <DownloadOutlinedIcon sx={{ mr: "10px" }} />
                         Скачать отчет
@@ -127,14 +155,15 @@ const Dashboard = () => {
                     gridColumn="span 8"
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
+                    id='line-chart'
                 >
-                    <Box
+                    {/* <Box
                         mt="25px"
                         p="0 30px"
                         display="flex "
                         justifyContent="space-between"
                         alignItems="center"
-                    >
+                    > */}
                         {/* <Box>
                             <Typography
                                 variant="h5"
@@ -158,9 +187,9 @@ const Dashboard = () => {
                                 />
                             </IconButton>
                         </Box> */}
-                    </Box>
+                    {/* </Box> */}
                     <Box height="250px" m="-20px 0 0 0">
-                        <LineChart isDashboard={true} />
+                        <LineChartYears isDashboard={true}/>
                     </Box>
                 </Box>
                 <Box
@@ -173,12 +202,12 @@ const Dashboard = () => {
                         display="flex"
                         justifyContent="space-between"
                         alignItems="center"
-                        borderBottom={`4px solid ${colors.primary[500]}`}
+                        borderBottom={`4px solid ${colors.primary[900]}`}
                         colors={colors.grey[100]}
                         p="15px"
                     >
                         <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-                            Recent Transactions
+                            Последние статьи
                         </Typography>
                     </Box>
                     {mockTransactions.map((transaction, i) => (
@@ -187,7 +216,7 @@ const Dashboard = () => {
                             display="flex"
                             justifyContent="space-between"
                             alignItems="center"
-                            borderBottom={`4px solid ${colors.primary[500]}`}
+                            borderBottom={`4px solid ${colors.primary[900]}`}
                             p="15px"
                         >
                             <Box>
@@ -208,7 +237,7 @@ const Dashboard = () => {
                                 p="5px 10px"
                                 borderRadius="4px"
                             >
-                                ${transaction.cost}
+                                {transaction.cost}
                             </Box>
                         </Box>
                     ))}
@@ -220,13 +249,14 @@ const Dashboard = () => {
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
                     p="20px"
+                    id='pie-chart'
                 >
                     <Typography
                         variant="h5"
-                        fontWeight="600"
-                        sx={{ padding: "10px 30px 0 30px" }}
+                        fontWeight="400"
+                        sx={{ padding: "10px 30px 30xp 30px" }}
                     >
-                        Sales Quantity
+                        По странам
                     </Typography>
 
                     <Box height="280px" mt="-50px">
@@ -237,13 +267,14 @@ const Dashboard = () => {
                     gridColumn="span 6"
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
+                    id='bar-chart'
                 >
                     <Typography
                         variant="h5"
-                        fontWeight="600"
+                        fontWeight="400"
                         sx={{ padding: "20px 30px 0 30px" }}
                     >
-                        Sales Quantity
+                        По сайтам
                     </Typography>
                     <Box height="250px" mt="-20px">
                         <BarChart isDashboard={true} />

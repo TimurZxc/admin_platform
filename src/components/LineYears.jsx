@@ -2,9 +2,9 @@ import React from 'react'
 import { useTheme } from '@mui/material'
 import { tokens } from '../theme'
 import { ResponsiveLine } from '@nivo/line'
-import { mockLineData as data} from '../data/mockData'
+import { mockLineDataYears as data} from '../data/mockData'
 
-const LineChart = () => {
+const LineChartYears = () => {
 
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
@@ -63,7 +63,7 @@ const LineChart = () => {
                 tickSize: 0,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: "Темы", // added
+                legend: "Год", // added
                 legendOffset: 36,
                 legendPosition: "middle",
             }}
@@ -115,4 +115,4 @@ const LineChart = () => {
     )
 }
 
-export default LineChart
+export default LineChartYears

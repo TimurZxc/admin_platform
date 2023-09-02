@@ -1,14 +1,31 @@
-import React from 'react'
-// import Header from '../../components/Header'
-import { Box } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { Box, Button } from '@mui/material'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { mockDataContacts } from '../../data/mockData'
+import { CancelOutlined } from '@mui/icons-material'
 import { useTheme } from '@mui/material'
 import { tokens } from '../../theme'
+import axios from "axios";
 
 const SourceInfo = () => {
+  const [deleteCount, setDeleteCount] = useState(0);
+
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
+
+  function handleDelete(id) {
+    axios
+      .delete(`/delete/article/${id}`)
+      .then(() => {
+        setDeleteCount((prevCount) => prevCount + 1);
+        console.log('status',  'Статья была успешно удалена!')
+        window.location.reload(true);
+      })
+      .catch((error) => {
+        console.log('error', error.message)
+      });
+  }  
+
 
   const columns = [
     { field: 'id', headerName: 'ID', cellClassName: 'cell-font', flex: 0.3 },
@@ -19,21 +36,25 @@ const SourceInfo = () => {
     { field: 'score', headerName: 'Оценка Модели', flex: 0.4, type: 'number', headerAlign: 'left', align: 'left', cellClassName: 'cell-font' },
     { field: 'cdate', headerName: 'Дата выгрузки', flex: 0.6, cellClassName: 'cell-font' },
     { field: 'udate', headerName: 'Дата обновления', flex: 0.6, cellClassName: 'cell-font' },
-    // { field: '#', flex: 0.3,
-    // renderCell: ({ row: { access } }) => {
-    //   return (
-    //     <Box width={'60%'} m={'0 auto'} p={'5px'} display={'flex'}
-    //       justifyContent={'center'} bgcolor={access === "admin" ? colors.greenAccent[600] :
-    //         access === "manager" ? colors.blueAccent[500] :
-    //           colors.redAccent[600]}>
-    //       {access === 'admin' && <AdminPanelSettingsOutlined />}
-    //       {access === 'manager' && <SecurityOutlinedIcon />}
-    //       {access === 'user' && <LockCloseOutlinedIcon />}
-    //       <Typography color={colors.grey[100]} sx={{ ml: '5px', mt: '3px' }}>
-    //         {access}
-    //       </Typography>
-    //     </Box>}
+    { field: 'cancel',headerName: '', flex: 0.2,
+    renderCell: () => {
+      return (
+        <Button
+          onClick={handleDelete}
+          sx={{ maxWidth: '32px', minWidth: '32px', backgroundColor: `${colors.redAccent[500]}`, padding: '3px', color: '#fff' }} >
+          <CancelOutlined />
+        </Button>
+        )
+      }
+    }
   ]
+
+  const handleModalClose = () => {
+    setRegistrationStatus('');
+  };
+
+  useEffect(() => {
+  }, [deleteCount])
 
   return (
     <Box m={'20px'}>
@@ -87,7 +108,7 @@ const SourceInfo = () => {
         },
       }}>
         <DataGrid
-          checkboxSelection
+          // checkboxSelection
           rows={mockDataContacts}
           columns={columns}
           components={{Toolbar: GridToolbar}}

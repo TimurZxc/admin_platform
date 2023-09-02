@@ -57,12 +57,24 @@ const BarChart = () => {
           }
         }}
         keys={[
-            'hot dog',
-            'burger',
-            'sandwich',
-            'kebab',
-            'fries',
-            'donut'
+            'Logistics',
+            'Transporter Times',
+            'AirPair',
+            'Logistics News',
+            'CargoWorld',
+            'HellyBerry',
+            'Gazette',
+            'Transit',
+            'Today Transit',
+            'Railways',
+            'Logistics Insight',
+            'Step Walk',
+            'Logistics Insights',
+            'Cargo Connect',
+            'Berqyt',
+            'Shipping Gazette',
+            'Coffee and Transit',
+            'Logistics Today',
         ]}
         indexBy="country"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
@@ -70,40 +82,7 @@ const BarChart = () => {
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
         colors={{ scheme: 'nivo' }}
-        defs={[
-            {
-                id: 'dots',
-                type: 'patternDots',
-                background: 'inherit',
-                color: '#38bcb2',
-                size: 4,
-                padding: 1,
-                stagger: true
-            },
-            {
-                id: 'lines',
-                type: 'patternLines',
-                background: 'inherit',
-                color: '#eed312',
-                rotation: -45,
-                lineWidth: 6,
-                spacing: 10
-            }
-        ]}
-        fill={[
-            {
-                match: {
-                    id: 'fries'
-                },
-                id: 'dots'
-            },
-            {
-                match: {
-                    id: 'sandwich'
-                },
-                id: 'lines'
-            }
-        ]}
+        
         borderColor={{
             from: 'color',
             modifiers: [
@@ -119,7 +98,7 @@ const BarChart = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'country',
+            legend: 'Страна',
             legendPosition: 'middle',
             legendOffset: 32
         }}
@@ -127,7 +106,7 @@ const BarChart = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'food',
+            legend: 'Статьи',
             legendPosition: 'middle',
             legendOffset: -40
         }}
