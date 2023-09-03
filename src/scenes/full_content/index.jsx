@@ -29,13 +29,12 @@ const FullContent = () => {
         headers: headers,
     })
       .then((response) => {
-        const newsData = response.data;
-        setNews(newsData);
+        setNews(response.data);
       })
       .catch((error) => {
         console.log('Error fetching data:', error);
       });
-  }, [news]);
+  }, []);
 
   // const getData = () =>{
 

@@ -47,13 +47,7 @@ const AccordionComponent = (props) => {
         console.log('data', propsData.title, propsData.description, propsData.url);
 
         axios
-            .post(
-                'http://127.0.0.1:8000/publich_channel',
-                {
-                    title: propsData.title,
-                    description: propsData.description,
-                    url: propsData.url,
-                },
+            .post(`http://127.0.0.1:8000/publich_channel?title=${propsData.title}&description=${propsData.description}&url=${propsData.url}`,
                 {
                     headers: headers,
                 }
@@ -70,6 +64,7 @@ const AccordionComponent = (props) => {
                 console.log('Error posting data:', error);
             });
     };
+
 
     React.useEffect(() => {
         getData();
