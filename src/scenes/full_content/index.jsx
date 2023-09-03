@@ -20,15 +20,8 @@ const FullContent = () => {
 
   React.useEffect(() => {
 
-    const headers = {
-      'Content-Type': 'application/json;charset=utf-8',
-      'Access-Control-Allow-Origin': '*',
-    };
-
     axios
-      .get('https://78df-2a0d-b201-10-f44a-c16f-a75f-9a8b-e6de.ngrok-free.app/news', {
-        headers: headers,
-    })
+      .get('https://78df-2a0d-b201-10-f44a-c16f-a75f-9a8b-e6de.ngrok-free.app/news')
       .then((response) => {
         const newsData = response.data;
         setNews(newsData);
