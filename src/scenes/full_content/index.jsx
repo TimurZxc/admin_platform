@@ -25,7 +25,7 @@ const FullContent = () => {
     };
 
     axios
-      .get('https://78df-2a0d-b201-10-f44a-c16f-a75f-9a8b-e6de.ngrok-free.app/news', {
+      .get('http://127.0.0.1:8000/news', {
         headers: headers,
     })
       .then((response) => {
@@ -44,7 +44,7 @@ const FullContent = () => {
     };
 
     axios
-      .get('https://78df-2a0d-b201-10-f44a-c16f-a75f-9a8b-e6de.ngrok-free.app/news', {
+      .get('http://127.0.0.1:8000/news', {
           headers: headers,
       })
       .then((response) => {
