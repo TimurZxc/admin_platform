@@ -23,7 +23,7 @@ const FullContent = () => {
 
   React.useEffect(() => {
     axios
-      .get('https://3e73-95-141-138-95.ngrok-free.app/publich_channel')
+      .get('https://78df-2a0d-b201-10-f44a-c16f-a75f-9a8b-e6de.ngrok-free.app/news')
       .then((response) => {
         const newsData = response.data;
         setNews(newsData);
@@ -35,7 +35,7 @@ const FullContent = () => {
 
   const getData = () =>{
     axios
-      .get('https://3e73-95-141-138-95.ngrok-free.app/publich_channel')
+      .get('https://78df-2a0d-b201-10-f44a-c16f-a75f-9a8b-e6de.ngrok-free.app/news')
       .then((response) => {
         const newsData = response.data;
         setNews(newsData);
