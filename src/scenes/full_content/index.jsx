@@ -132,7 +132,7 @@ const FullContent = () => {
         }
 
         {/* HardCoded */}
-      <Accordion defaultExpanded>
+      {/* <Accordion defaultExpanded>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography color={colors.greenAccent[500]} variant="h4">
             Заголовок: High-Speed Rail Expansion
@@ -223,7 +223,7 @@ const FullContent = () => {
             <SendOutlined sx={{ ml: "10px", fontSize: '18px' }} />
           </Button>
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
     </Box >
   );
 };
