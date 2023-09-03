@@ -18,12 +18,6 @@ const FullContent = () => {
   const [news, setNews] = React.useState([])
   const [published, setPublished] = React.useState(0)
 
-  axios.defaults.headers.get['Content-Type'] = 'application/json;charset=utf-8';
-  axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
-
-  axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
-  axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-
   React.useEffect(() => {
 
     const headers = {
