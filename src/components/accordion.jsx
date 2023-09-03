@@ -86,9 +86,11 @@ const AccordionComponent = (props) => {
                 <Typography>
                     {propsData.title}
                 </Typography>
+                <br />
                 <Typography>
                     {propsData.description}
                 </Typography>
+                <br />
                 <Typography color={colors.greenAccent[500]} variant="h5">
                     {propsData.url}
                 </Typography>
