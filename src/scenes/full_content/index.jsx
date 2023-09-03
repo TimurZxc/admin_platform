@@ -104,9 +104,11 @@ const FullContent = () => {
                 <Typography>
                     {data.title}
                 </Typography>
+                <br />
                 <Typography>
                     {data.description}
                 </Typography>
+                <br />
                 <Typography color={colors.greenAccent[500]} variant="h5">
                     {data.url}
                 </Typography>
