@@ -7,16 +7,16 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { SendOutlined } from "@mui/icons-material";
 // import { UploadOutlined } from "@mui/icons-material";
-import { tokens } from "../../theme";
+// import { tokens } from "../../theme";
 import React from "react";
 import axios from "axios";
+import AccordionComponent from "../../components/accordion";
 
 const FullContent = () => {
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  // const colors = tokens(theme.palette.mode);
 
   const [news, setNews] = React.useState([])
-  const [published, setPublished] = React.useState(0)
 
   React.useEffect(() => {
 
@@ -37,62 +37,44 @@ const FullContent = () => {
       });
   }, [news]);
 
-  const getData = () =>{
+  // const getData = () =>{
 
-    const headers = {
-      'Content-Type': 'application/json;charset=utf-8'
-    };
+  //   const headers = {
+  //     'Content-Type': 'application/json;charset=utf-8'
+  //   };
 
-    axios
-      .get('http://127.0.0.1:8000/news', {
-          headers: headers,
-      })
-      .then((response) => {
-        const newsData = response.data;
-        setNews(newsData);
-      })
-      .catch((error) => {
-        console.log('Error fetching data:', error);
-      });
-  }
+  //   axios
+  //     .get('http://127.0.0.1:8000/news', {
+  //         headers: headers,
+  //     })
+  //     .then((response) => {
+  //       const newsData = response.data;
+  //       setNews(newsData);
+  //     })
+  //     .catch((error) => {
+  //       console.log('Error fetching data:', error);
+  //     });
+  // }
 
-  const publishNewsData = (id) => {
-    const headers = {
-      'Content-Type': 'application/json;charset=utf-8',
-      'Access-Control-Allow-Origin': '*',
-    };
-
-    axios
-      .post(
-        `https://3e73-95-141-138-95.ngrok-free.app/publich_channel/${id}`,
-        {
-          title: news.title,
-          description: news.description,
-          url: news.url
-        },
-        {
-          headers: headers,
-        }
-      )
-      .then((response) => {
-        if (response.status === 200) {
-          console.log('status', 'Статья была опубликована!');
-          setPublished((prevCount) => prevCount + 1)
-        }
-      })
-      .catch((error) => {
-        console.log('Error posting data:', error);
-      });
-  };
-
-  React.useEffect(() => {
-    getData();
-  }, [published])
+  const Articles = news.map(data => {
+    return (
+      <AccordionComponent 
+        key={data.id}
+        id={data.id}
+        title={data.title}
+        description={data.description}
+        url={data.url}
+        {...data}
+      />
+    );
+  });
+  
 
   return (
     <Box m="0 20px 0 20px">
       <Header title="FAQ" subtitle="Frequently Asked Questions Page" />
-      {
+        {Articles}
+      {/* {
         news.map((data) => (
           <Accordion defaultExpanded key={data.id}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -129,7 +111,7 @@ const FullContent = () => {
             </AccordionDetails>
         </Accordion>
         ))
-        }
+        } */}
 
         {/* HardCoded */}
       {/* <Accordion defaultExpanded>

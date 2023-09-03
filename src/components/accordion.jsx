@@ -10,30 +10,70 @@ import { tokens } from "../theme";
 import axios from 'axios';
 
 const AccordionComponent = (props) => {
-    const theme = useTheme();
+    const theme = useTheme(props);
     const colors = tokens(theme.palette.mode);
+    const [news, setNews] = React.useState([])
+    const [propsData, setPropsDataws] = React.useState({
+        title: props.title,
+        description: props.description,
+        url: props.url,
+    })
+    const [published, setPublished] = React.useState(0)
 
-    function handleSubmit(event) {
+    const getData = () => {
+
         const headers = {
-            'Content-Type': 'application/json;charset=utf-8',
-            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json;charset=utf-8'
         };
 
-        event.preventDefault();
-        axios.post('test/', {
-            title: props.title,
-            description: props.description,
-            url: props.url
-            },
-            {headers: headers}
-        ).then((response) => {
-            if (response.status === 200) {
-                console.log('status', 'Статья была опубликована!');
-            }
-        }).catch((error) => {
-                console.log('Error posting data:', error);
+        axios
+            .get('http://127.0.0.1:8000/news', {
+                headers: headers,
+            })
+            .then((response) => {
+                const newsData = response.data;
+                setNews(newsData);
+            })
+            .catch((error) => {
+                console.log('Error fetching data:', error);
             });
     }
+
+    const publishNewsData = () => {
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+
+        console.log('data', propsData.title, propsData.description, propsData.url);
+
+        axios
+            .post(
+                'http://127.0.0.1:8000/publich_channel',
+                {
+                    title: propsData.title,
+                    description: propsData.description,
+                    url: propsData.url,
+                },
+                {
+                    headers: headers,
+                }
+            )
+            .then((response) => {
+                if (response.status === 200) {
+                    console.log('status', 'Статья была опубликована!');
+                    setPublished((prevCount) => prevCount + 1);
+                } else {
+                    console.log('Received unexpected status code:', response.status);
+                }
+            })
+            .catch((error) => {
+                console.log('Error posting data:', error);
+            });
+    };
+
+    React.useEffect(() => {
+        getData();
+    }, [published])
 
     return (
         <Accordion defaultExpanded>
@@ -44,13 +84,13 @@ const AccordionComponent = (props) => {
             </AccordionSummary>
             <AccordionDetails>
                 <Typography>
-                    {props.title}
+                    {propsData.title}
                 </Typography>
                 <Typography>
-                    {props.description}
+                    {propsData.description}
                 </Typography>
                 <Typography color={colors.greenAccent[500]} variant="h5">
-                    {props.url}
+                    {propsData.url}
                 </Typography>
                 <Button
                     sx={{
@@ -61,7 +101,7 @@ const AccordionComponent = (props) => {
                         padding: "10px 10px",
                         margin: '10px 0 0 0'
                     }}
-                    onClick={handleSubmit}
+                    onClick={publishNewsData}
                 >
                     Опубликовать
                     <SendOutlined sx={{ ml: "10px", fontSize: '18px' }} />
