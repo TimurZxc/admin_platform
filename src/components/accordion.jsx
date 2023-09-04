@@ -18,7 +18,9 @@ const AccordionComponent = (props) => {
         description: props.description,
         url: props.url,
         titleRu: props.titleRu,
-        descriptionRu: props.descriptionRu
+        descriptionRu: props.descriptionRu,
+        titleRu: props.titleEn,
+        descriptionRu: props.descriptionEn
     })
     const [published, setPublished] = React.useState(0)
 
@@ -97,11 +99,11 @@ const AccordionComponent = (props) => {
                 </Typography>
                 <br />
                 <Typography>
-                    {propsData.titleRu}
+                    {propsData.titleEn}
                 </Typography>
                 <br />
                 <Typography>
-                    {propsData.descriptionRu}
+                    {propsData.descriptionEn}
                 </Typography>
                 <Typography color={colors.greenAccent[500]} variant="h5">
                     {propsData.url}
