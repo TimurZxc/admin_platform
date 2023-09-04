@@ -14,8 +14,8 @@ const AccordionComponent = (props) => {
     const colors = tokens(theme.palette.mode);
     const [news, setNews] = React.useState([])
     const [propsData, setPropsDataws] = React.useState({
-        title: props.title,
-        description: props.description,
+        title: props.titleRu,
+        description: props.descriptionRu,
         url: props.url,
     })
     const [published, setPublished] = React.useState(0)
@@ -84,6 +84,14 @@ const AccordionComponent = (props) => {
                 <br />
                 <Typography>
                     {propsData.description}
+                </Typography>
+                <br />
+                <Typography>
+                    {propsData.titleRu}
+                </Typography>
+                <br />
+                <Typography>
+                    {propsData.descriptionRu}
                 </Typography>
                 <br />
                 <Typography color={colors.greenAccent[500]} variant="h5">
