@@ -17,6 +17,8 @@ const AccordionComponent = (props) => {
         title: props.titleRu,
         description: props.descriptionRu,
         url: props.url,
+        titleRu: props.title_ru,
+        descriptionRu: props.description_ru
     })
     const [published, setPublished] = React.useState(0)
 
