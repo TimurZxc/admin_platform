@@ -64,6 +64,8 @@ const FullContent = () => {
         description={data.description}
         titleRu={data.title_ru}
         descriptionRu={data.description_ru}
+        titleEn={data.title_en}
+        descriptionEn={data.description_en}
         url={data.url}
         {...data}
       />
