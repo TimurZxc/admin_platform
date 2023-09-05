@@ -47,7 +47,7 @@ const AccordionComponent = (props) => {
         };
 
         axios
-            .post(`http://127.0.0.1:8000/publich_channel?title_ru=${props.title_ru}&description_ru=${props.description_ru}&title_en=${props.title_en}&description_en=${props.description_en}&url=${props.url}`,
+            .post(`http://127.0.0.1:8000/publish_channel?title_ru=${props.title_ru}&description_ru=${props.description_ru}&title_en=${props.title_en}&description_en=${props.description_en}&url=${props.url}`,
                 {
                     headers: headers,
                 }
