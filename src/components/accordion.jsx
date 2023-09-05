@@ -13,15 +13,13 @@ const AccordionComponent = (props) => {
     const theme = useTheme(props);
     const colors = tokens(theme.palette.mode);
     const [news, setNews] = React.useState([])
-    const [propsData, setPropsDataws] = React.useState({
-        title: props.title,
-        description: props.description,
-        url: props.url,
-        titleRu: props.titleRu,
-        descriptionRu: props.descriptionRu,
-        titleRu: props.titleEn,
-        descriptionRu: props.descriptionEn
-    })
+    // const [propsData, setPropsDataws] = React.useState({
+    //     url: props.url,
+    //     titleRu: props.titleRu,
+    //     descriptionRu: props.descriptionRu,
+    //     titleRu: props.titleEn,
+    //     descriptionRu: props.descriptionEn
+    // })
     const [published, setPublished] = React.useState(0)
 
     const getData = () => {
@@ -51,7 +49,7 @@ const AccordionComponent = (props) => {
         console.log('data', propsData.title, propsData.description, propsData.url);
 
         axios
-            .post(`http://127.0.0.1:8000/publich_channel?title=${propsData.title}&description=${propsData.description}&url=${propsData.url}`,
+            .post(`http://127.0.0.1:8000/publich_channel?title=${props.titleRu}&description=${props.descriptionRu}&url=${props.url}`,
                 {
                     headers: headers,
                 }
@@ -83,31 +81,23 @@ const AccordionComponent = (props) => {
             </AccordionSummary>
             <AccordionDetails>
                 <Typography>
-                    {propsData.title}
+                    {props.titleRu}
                 </Typography>
                 <br />
                 <Typography>
-                    {propsData.description}
+                    {props.descriptionRu}
                 </Typography>
                 <br />
                 <Typography>
-                    {propsData.titleRu}
+                    {props.titleEn}
                 </Typography>
                 <br />
                 <Typography>
-                    {propsData.descriptionRu}
-                </Typography>
-                <br />
-                <Typography>
-                    {propsData.titleEn}
-                </Typography>
-                <br />
-                <Typography>
-                    {propsData.descriptionEn}
+                    {props.descriptionEn}
                 </Typography>
                 <br />
                 <Typography color={colors.greenAccent[500]} variant="h5">
-                    {propsData.url}
+                    {props.url}
                 </Typography>
                 <Button
                     sx={{

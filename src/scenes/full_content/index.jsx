@@ -60,8 +60,6 @@ const FullContent = () => {
       <AccordionComponent 
         key={data.id}
         id={data.id}
-        title={data.title}
-        description={data.description}
         titleRu={data.title_ru}
         descriptionRu={data.description_ru}
         titleEn={data.title_en}
