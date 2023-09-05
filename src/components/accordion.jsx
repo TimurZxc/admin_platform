@@ -47,7 +47,7 @@ const AccordionComponent = (props) => {
         };
 
         axios
-            .post(`http://127.0.0.1:8000/publich_channel?title=${props.titleRu}&description=${props.descriptionRu}&url=${props.url}`,
+            .post(`http://127.0.0.1:8000/publich_channel?title_ru=${props.title_ru}&description_ru=${props.description_ru}&title_en=${props.title_en}&description_en=${props.description_en}&url=${props.url}`,
                 {
                     headers: headers,
                 }
@@ -79,11 +79,11 @@ const AccordionComponent = (props) => {
             </AccordionSummary>
             <AccordionDetails>
                 <Typography>
-                    {props.titleRu}
+                    {props.title_ru}
                 </Typography>
                 <br />
                 <Typography>
-                    {props.descriptionRu}
+                    {props.description_ru}
                 </Typography>
                 <br />
                 <Typography color={colors.greenAccent[500]}>
@@ -91,11 +91,11 @@ const AccordionComponent = (props) => {
                 </Typography>
                 <br />
                 <Typography>
-                    {props.titleEn}
+                    {props.title_en}
                 </Typography>
                 <br />
                 <Typography>
-                    {props.descriptionEn}
+                    {props.description_en}
                 </Typography>
                 <br />
                 <Typography color={colors.greenAccent[500]} variant="h5">

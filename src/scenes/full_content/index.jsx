@@ -62,10 +62,10 @@ const FullContent = () => {
       <AccordionComponent 
         key={data.id}
         id={data.id}
-        titleRu={data.title_ru}
-        descriptionRu={data.description_ru}
-        titleEn={data.title_en}
-        descriptionEn={data.description_en}
+        title_ru={data.title_ru}
+        description_ru={data.description_ru}
+        title_en={data.title_en}
+        description_en={data.description_en}
         url={data.url}
         {...data}
       />
