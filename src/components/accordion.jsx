@@ -46,8 +46,6 @@ const AccordionComponent = (props) => {
             'Content-Type': 'application/json',
         };
 
-        console.log('data', propsData.title, propsData.description, propsData.url);
-
         axios
             .post(`http://127.0.0.1:8000/publich_channel?title=${props.titleRu}&description=${props.descriptionRu}&url=${props.url}`,
                 {

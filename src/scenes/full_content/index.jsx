@@ -24,6 +24,8 @@ const FullContent = () => {
       'Content-Type': 'application/json;charset=utf-8'
     };
 
+    console.log('data', news.titleRu, news.descriptionRu);
+
     axios
       .get('http://127.0.0.1:8000/news', {
         headers: headers,
